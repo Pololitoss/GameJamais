@@ -5,6 +5,8 @@ public class Deplacement : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
     private Vector3 velocity = Vector3.zero;
     private Vector2 moveInput;
 
@@ -27,6 +29,12 @@ public class Deplacement : MonoBehaviour
             
             var jumpAction = playerInput.actions["Jump"];
             jumpAction.performed += OnJump;
+            
+            var attackBiteAction = playerInput.actions["AttackBite"];
+            attackBiteAction.performed += OnAttackBite;
+            
+            var attackTeteAction = playerInput.actions["AttackTete"];
+            attackTeteAction.performed += OnAttackTete;
         }
     }
 
@@ -38,6 +46,11 @@ public class Deplacement : MonoBehaviour
         float horizontalMvt = moveInput.x * moveSpeed * Time.deltaTime;
 
         MovePlayer(horizontalMvt);
+
+        float characterVelocity = Mathf.Abs(rb.linearVelocity.x);
+        animator.SetFloat("Speed", characterVelocity);
+
+        Flip(rb.linearVelocity.x);
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -47,7 +60,7 @@ public class Deplacement : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed && (isGrounded || doubleJump<2))
+        if(context.performed && (isGrounded || doubleJump<1))
         {
             doubleJump ++;
             isJumping = true;
@@ -57,6 +70,30 @@ public class Deplacement : MonoBehaviour
         }
     }
 
+    private void OnAttackBite(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            animator.SetBool("IsAttacking", true);
+            animator.SetTrigger("AttackBite");
+        }
+    }
+
+    private void OnAttackTete(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            animator.SetBool("IsAttacking", true);
+            animator.SetTrigger("AttackTete");
+        }
+    }
+
+    // Méthode appelée par Animation Event à la fin de l'attaque
+    public void OnAttackFinished()
+    {
+        animator.SetBool("IsAttacking", false);
+    }
+
     void MovePlayer(float _horizontalMvt){
         Vector3 targetVelocity = new Vector2(_horizontalMvt, rb.linearVelocity.y);
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref velocity, .05f); //la on applique la vitesse au rb
@@ -64,6 +101,14 @@ public class Deplacement : MonoBehaviour
         if(isJumping == true){
             rb.AddForce(new Vector2(0f, jumpForce));
             isJumping = false;
+        }
+    }
+
+    void Flip(float _velocity){
+        if(_velocity > 0.1f){
+            spriteRenderer.flipX = false;
+        }else if(_velocity < -0.1f){
+            spriteRenderer.flipX = true;
         }
     }
 }

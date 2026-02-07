@@ -31074,8 +31074,8 @@ GameObject:
   - component: {fileID: 460909938}
   - component: {fileID: 460909940}
   m_Layer: 8
-  m_Name: IdleBleu_0
-  m_TagString: Untagged
+  m_Name: StickBleu
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31148,7 +31148,7 @@ Transform:
   m_GameObject: {fileID: 460909931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6349, y: -2.806, z: 0}
+  m_LocalPosition: {x: -0.69, y: -2.33, z: 0}
   m_LocalScale: {x: 0.5, y: 0.4, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31194,7 +31194,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.8129426, y: 5.375}
+    oldSize: {x: 1.9379731, y: 5.5}
     newSize: {x: 1.9379731, y: 5.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -31243,6 +31243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Deplacement
   moveSpeed: 600
   rb: {fileID: 460909935}
+  animator: {fileID: 460909940}
+  spriteRenderer: {fileID: 460909932}
   isJumping: 0
   jumpForce: 1500
   isGrounded: 0
