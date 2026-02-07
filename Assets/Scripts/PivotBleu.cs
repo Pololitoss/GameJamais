@@ -39,7 +39,7 @@ public class PivotHpOnClick : MonoBehaviour
 
     [Tooltip("How fast the bar reaches its target position (units per second).")]
     [Min(0.01f)]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 11f;
 
     [Header("Keep on screen")]
     [Tooltip("Padding in viewport space (0..0.5). 0.1 means keep center inside [0.1, 0.9].")]
@@ -77,7 +77,8 @@ public class PivotHpOnClick : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        // Right click -> Blue bar pivots / glitches.
+        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
             // Recompute pivot each click (the object can move/scale/rotate)
             pivotWorld = GetVisualCenterWorld(bar);
