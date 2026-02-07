@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: 13441d1a0aacca9e79a3d270508def2d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1414496544327184153
+    second: AttaquePaf2Bleu_0
+  - first:
+      213: -7075549324305231146
+    second: AttaquePaf2Bleu_1
+  - first:
+      213: 6911966489353880521
+    second: AttaquePaf2Bleu_2
+  - first:
+      213: -8884842343635642948
+    second: AttaquePaf2Bleu_3
+  - first:
+      213: 1462487926663426071
+    second: AttaquePaf2Bleu_4
+  - first:
+      213: 969414869700488455
+    second: AttaquePaf2Bleu_5
+  - first:
+      213: -1245019772064958712
+    second: AttaquePaf2Bleu_6
+  - first:
+      213: 5758102129375640479
+    second: AttaquePaf2Bleu_7
+  - first:
+      213: -3921022917911216063
+    second: AttaquePaf2Bleu_8
+  - first:
+      213: -1423013295744348502
+    second: AttaquePaf2Bleu_9
+  - first:
+      213: -6058158114656910104
+    second: AttaquePaf2Bleu_10
+  - first:
+      213: -1498582654029301526
+    second: AttaquePaf2Bleu_11
+  - first:
+      213: -1322861990334717138
+    second: AttaquePaf2Bleu_12
+  - first:
+      213: -3125970243324755267
+    second: AttaquePaf2Bleu_13
+  - first:
+      213: -2791957493255644540
+    second: AttaquePaf2Bleu_14
+  - first:
+      213: -7578285820397849831
+    second: AttaquePaf2Bleu_15
+  - first:
+      213: -4626434641370810157
+    second: AttaquePaf2Bleu_16
+  - first:
+      213: 4950922547204764499
+    second: AttaquePaf2Bleu_17
+  - first:
+      213: 8526915659374060602
+    second: AttaquePaf2Bleu_18
+  - first:
+      213: 1580994856728058366
+    second: AttaquePaf2Bleu_19
+  - first:
+      213: 9001295515115953637
+    second: AttaquePaf2Bleu_20
+  - first:
+      213: 7144449961607665803
+    second: AttaquePaf2Bleu_21
+  - first:
+      213: -2818370707650093892
+    second: AttaquePaf2Bleu_22
+  - first:
+      213: 9083195496008137140
+    second: AttaquePaf2Bleu_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 25
+        width: 33
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e05c5323e2be5ce0800000000000000
+      internalID: -1414496544327184153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_1
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 25
+        width: 33
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d2180e90699ecd90800000000000000
+      internalID: -7075549324305231146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_2
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 27
+        width: 31
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c38751a6ec3cef50800000000000000
+      internalID: 6911966489353880521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_3
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 28
+        width: 35
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb59f3e56f2b2b480800000000000000
+      internalID: -8884842343635642948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_4
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 26
+        width: 37
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 710321d450dcb4410800000000000000
+      internalID: 1462487926663426071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_5
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 24
+        width: 54
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70daa7410bd047d00800000000000000
+      internalID: 969414869700488455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_6
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 24
+        width: 66
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 807fabb1d1dc8bee0800000000000000
+      internalID: -1245019772064958712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_7
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 27
+        width: 13
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9bfad10163e8ef40800000000000000
+      internalID: 5758102129375640479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_8
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 27
+        width: 63
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1408cbd3e6ab599c0800000000000000
+      internalID: -3921022917911216063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_9
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 47
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aae008c62f0704ce0800000000000000
+      internalID: -1423013295744348502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_10
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 26
+        width: 62
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e489beca491deba0800000000000000
+      internalID: -6058158114656910104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_11
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 22
+        width: 59
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae875081407f33be0800000000000000
+      internalID: -1498582654029301526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_12
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 22
+        width: 56
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e23ab33570044ade0800000000000000
+      internalID: -1322861990334717138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_13
+      rect:
+        serializedVersion: 2
+        x: 1347
+        y: 22
+        width: 51
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db2cf2430a25e94d0800000000000000
+      internalID: -3125970243324755267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_14
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 24
+        width: 49
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ad18ac379f049d0800000000000000
+      internalID: -2791957493255644540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_15
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 24
+        width: 41
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9137ec4a23584d690800000000000000
+      internalID: -7578285820397849831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_16
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 21
+        width: 37
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d8f780a43a9bcfb0800000000000000
+      internalID: -4626434641370810157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_17
+      rect:
+        serializedVersion: 2
+        x: 1833
+        y: 23
+        width: 32
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 353bc9853d535b440800000000000000
+      internalID: 4950922547204764499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_18
+      rect:
+        serializedVersion: 2
+        x: 1936
+        y: 25
+        width: 33
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a34e4ba5d90b55670800000000000000
+      internalID: 8526915659374060602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_19
+      rect:
+        serializedVersion: 2
+        x: 2028
+        y: 28
+        width: 38
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9defa1272d0f510800000000000000
+      internalID: 1580994856728058366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_20
+      rect:
+        serializedVersion: 2
+        x: 2125
+        y: 26
+        width: 37
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ed9dc084960bec70800000000000000
+      internalID: 9001295515115953637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_21
+      rect:
+        serializedVersion: 2
+        x: 2204
+        y: 24
+        width: 42
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b889d2d136f262360800000000000000
+      internalID: 7144449961607665803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_22
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 26
+        width: 29
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc562516c223e8d0800000000000000
+      internalID: -2818370707650093892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttaquePaf2Bleu_23
+      rect:
+        serializedVersion: 2
+        x: 2409
+        y: 25
+        width: 38
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b93ef4cd2efd0e70800000000000000
+      internalID: 9083195496008137140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      AttaquePaf2Bleu_0: -1414496544327184153
+      AttaquePaf2Bleu_1: -7075549324305231146
+      AttaquePaf2Bleu_10: -6058158114656910104
+      AttaquePaf2Bleu_11: -1498582654029301526
+      AttaquePaf2Bleu_12: -1322861990334717138
+      AttaquePaf2Bleu_13: -3125970243324755267
+      AttaquePaf2Bleu_14: -2791957493255644540
+      AttaquePaf2Bleu_15: -7578285820397849831
+      AttaquePaf2Bleu_16: -4626434641370810157
+      AttaquePaf2Bleu_17: 4950922547204764499
+      AttaquePaf2Bleu_18: 8526915659374060602
+      AttaquePaf2Bleu_19: 1580994856728058366
+      AttaquePaf2Bleu_2: 6911966489353880521
+      AttaquePaf2Bleu_20: 9001295515115953637
+      AttaquePaf2Bleu_21: 7144449961607665803
+      AttaquePaf2Bleu_22: -2818370707650093892
+      AttaquePaf2Bleu_23: 9083195496008137140
+      AttaquePaf2Bleu_3: -8884842343635642948
+      AttaquePaf2Bleu_4: 1462487926663426071
+      AttaquePaf2Bleu_5: 969414869700488455
+      AttaquePaf2Bleu_6: -1245019772064958712
+      AttaquePaf2Bleu_7: 5758102129375640479
+      AttaquePaf2Bleu_8: -3921022917911216063
+      AttaquePaf2Bleu_9: -1423013295744348502
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -6,11 +6,17 @@ public class PerteHPBleu : MonoBehaviour
     [Header("How much to shrink each click (world units)")]
     [Tooltip("Amount removed from the bar width each click, in world units (e.g. 0.1)")]
     [SerializeField]
-    private float shrinkWorldUnits = 0.1f;
+    private float shrinkWorldUnits = 0.3f;
 
     [Header("Optional: set if the bar is not this object")]
     [SerializeField]
     private Transform bar;
+
+    [Header("Death menu (shown when HP reaches 0)")]
+    [SerializeField]
+    private DeathMenuController deathMenu;
+
+    private bool isDead;
 
     private float initialLocalWidth;
     private float currentLocalWidth;
@@ -35,8 +41,9 @@ public class PerteHPBleu : MonoBehaviour
     void Update()
     {
         // Unity 6 project is using the new Input System.
-        // This checks for a left mouse click and works even when legacy Input is disabled.
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        // Right click -> Blue takes damage.
+        // Works even when legacy Input is disabled.
+        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
             ShrinkOnce();
         }
@@ -53,6 +60,13 @@ public class PerteHPBleu : MonoBehaviour
         Vector3 p = bar.localPosition;
         p.x = initialLeftLocalX + (currentLocalWidth * 0.5f);
         bar.localPosition = p;
+
+        if (!isDead && currentLocalWidth <= 0f)
+        {
+            isDead = true;
+            if (deathMenu != null)
+                deathMenu.Show();
+        }
     }
 
     private void SetLocalWidth(Transform t, float targetLocalWidth)
