@@ -10,6 +10,11 @@ public class Deplacement : MonoBehaviour
 
     public bool isJumping = false;
     public float jumpForce;
+    public bool isGrounded;
+    public int doubleJump = 0;
+
+    public Transform groundCheckLeft;
+    public Transform groundCheckRight;
 
     void OnEnable()
     {
@@ -28,6 +33,8 @@ public class Deplacement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
+
         float horizontalMvt = moveInput.x * moveSpeed * Time.deltaTime;
 
         MovePlayer(horizontalMvt);
@@ -40,9 +47,13 @@ public class Deplacement : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if(context.performed && (isGrounded || doubleJump<2))
         {
+            doubleJump ++;
             isJumping = true;
+        }
+        if(isGrounded){
+            doubleJump = 0;
         }
     }
 
