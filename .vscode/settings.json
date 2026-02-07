@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "GameJamais.slnx"
+    "dotnet.defaultSolution": "PROZACZOPIXAN.slnx"
 }
