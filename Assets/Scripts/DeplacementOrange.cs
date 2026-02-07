@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Deplacement : MonoBehaviour
+public class DeplacementOrange : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
@@ -23,17 +23,17 @@ public class Deplacement : MonoBehaviour
         var playerInput = GetComponent<PlayerInput>();
         if (playerInput != null)
         {
-            var moveAction = playerInput.actions["Move"];
+            var moveAction = playerInput.actions["MoveOrange"];
             moveAction.performed += OnMove;
             moveAction.canceled += OnMove;
             
-            var jumpAction = playerInput.actions["Jump"];
+            var jumpAction = playerInput.actions["JumpOrange"];
             jumpAction.performed += OnJump;
             
-            var attackBiteAction = playerInput.actions["AttackBite"];
+            var attackBiteAction = playerInput.actions["AttackBiteOrange"];
             attackBiteAction.performed += OnAttackBite;
             
-            var attackTeteAction = playerInput.actions["AttackTete"];
+            var attackTeteAction = playerInput.actions["AttackTeteOrange"];
             attackTeteAction.performed += OnAttackTete;
         }
     }
@@ -43,17 +43,17 @@ public class Deplacement : MonoBehaviour
         var playerInput = GetComponent<PlayerInput>();
         if (playerInput != null)
         {
-            var moveAction = playerInput.actions["Move"];
+            var moveAction = playerInput.actions["MoveOrange"];
             moveAction.performed -= OnMove;
             moveAction.canceled -= OnMove;
             
-            var jumpAction = playerInput.actions["Jump"];
+            var jumpAction = playerInput.actions["JumpOrange"];
             jumpAction.performed -= OnJump;
             
-            var attackBiteAction = playerInput.actions["AttackBite"];
+            var attackBiteAction = playerInput.actions["AttackBiteOrange"];
             attackBiteAction.performed -= OnAttackBite;
             
-            var attackTeteAction = playerInput.actions["AttackTete"];
+            var attackTeteAction = playerInput.actions["AttackTeteOrange"];
             attackTeteAction.performed -= OnAttackTete;
         }
     }

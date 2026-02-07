@@ -16,9 +16,27 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "MoveOrange",
+                    "type": "Value",
+                    "id": "95baf7da-5c2b-4be0-b51c-003d262ad1a6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JumpOrange",
+                    "type": "Button",
+                    "id": "10314ab1-21f3-4c8e-a61b-e624849c8e43",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -34,9 +52,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AttackBiteOrange",
+                    "type": "Button",
+                    "id": "3f1dcc1f-2845-4153-bf2b-50914dcab08d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "AttackTete",
                     "type": "Button",
                     "id": "e39a171e-474d-42cf-a6c3-fa4bc4adfb72",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AttackTeteOrange",
+                    "type": "Button",
+                    "id": "6765bbb4-13c1-44bb-9810-a4634f925260",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -52,6 +88,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "627ea335-6855-4cce-a0d2-26f636295f0b",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpOrange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -111,6 +158,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "2D Vector",
+                    "id": "985d47a8-bc5d-477e-add8-357ef42b0558",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveOrange",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "15489c6e-b2a6-41d2-8c60-00bf7f735f78",
+                    "path": "<Touchscreen>/delta/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveOrange",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "35106ef7-d103-4b4a-a822-0ddb718d798b",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveOrange",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "e65fd2d9-913e-41af-a490-87e668513666",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveOrange",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5f46687e-c447-4b83-91af-00b8cc783138",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveOrange",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "be9626f6-1b07-44c0-976c-c7f8a9cb0961",
                     "path": "<Keyboard>/#(F)",
@@ -123,12 +225,34 @@
                 },
                 {
                     "name": "",
+                    "id": "a1b9edda-d66a-422c-b59b-482d17167cab",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackBiteOrange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "52affcbe-ec78-45ba-911f-8f876deecb37",
                     "path": "<Keyboard>/#(H)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "AttackTete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "220d067a-e51c-4317-bf5e-5db4ed7e821d",
+                    "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackTeteOrange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
