@@ -103,6 +103,7 @@ public class DeplacementOrange : MonoBehaviour
     {
         if (context.performed)
         {
+            Debug.Log("AttackTete déclenchée!");
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackTete");
         }
