@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PivotOrange : MonoBehaviour
 {
@@ -63,6 +62,8 @@ public class PivotOrange : MonoBehaviour
     private bool hasRotateTarget;
     private float rotateRemainingDegrees;
 
+    private HealthOrange health;
+
     void Awake()
     {
         if (bar == null) bar = transform;
@@ -73,47 +74,59 @@ public class PivotOrange : MonoBehaviour
 
         // Use the visual center as pivot (works even if the Transform pivot isn't centered)
         pivotWorld = GetVisualCenterWorld(bar);
+
+        health = FindFirstObjectByType<HealthOrange>();
+        if (health != null)
+            health.Damaged += OnDamaged;
+    }
+
+    private void OnDestroy()
+    {
+        if (health != null)
+            health.Damaged -= OnDamaged;
+    }
+
+    private void OnDamaged(int appliedDamage, int currentHp, int maxHp)
+    {
+        TriggerPivot();
+    }
+
+    private void TriggerPivot()
+    {
+        pivotWorld = GetVisualCenterWorld(bar);
+
+        float extra = (randomDegrees > 0f) ? Random.Range(-randomDegrees, randomDegrees) : 0f;
+        float total = -(degreesPerClick + extra); // inverse compared to blue
+
+        if (smoothRotate)
+        {
+            rotateRemainingDegrees += total;
+            hasRotateTarget = true;
+        }
+        else
+        {
+            Vector3 axis = rotateAroundZ ? Vector3.forward : Vector3.up;
+            bar.RotateAround(pivotWorld, axis, total);
+        }
+
+        if (moveRadius > 0f)
+        {
+            Vector2 rnd = Random.insideUnitCircle * moveRadius;
+
+            Vector2 currentWorld = (rb2d != null) ? rb2d.position : (Vector2)bar.position;
+            moveTargetWorld = ClampToViewport(currentWorld + rnd);
+            hasMoveTarget = true;
+
+            if (!smoothMove)
+            {
+                ApplyMoveWorld(moveTargetWorld);
+                hasMoveTarget = false;
+            }
+        }
     }
 
     void Update()
     {
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            pivotWorld = GetVisualCenterWorld(bar);
-
-            float extra = (randomDegrees > 0f) ? Random.Range(-randomDegrees, randomDegrees) : 0f;
-
-            // Inverse rotation compared to PivotBleu
-            float total = -(degreesPerClick + extra);
-
-            if (smoothRotate)
-            {
-                rotateRemainingDegrees += total;
-                hasRotateTarget = true;
-            }
-            else
-            {
-                Vector3 axis = rotateAroundZ ? Vector3.forward : Vector3.up;
-                bar.RotateAround(pivotWorld, axis, total);
-            }
-
-            // Random glitch move (local)
-            if (moveRadius > 0f)
-            {
-                Vector2 rnd = Random.insideUnitCircle * moveRadius;
-
-                Vector2 currentWorld = (rb2d != null) ? rb2d.position : (Vector2)bar.position;
-                moveTargetWorld = ClampToViewport(currentWorld + rnd);
-                hasMoveTarget = true;
-
-                if (!smoothMove)
-                {
-                    ApplyMoveWorld(moveTargetWorld);
-                    hasMoveTarget = false;
-                }
-            }
-        }
-
         if (hasRotateTarget && smoothRotate)
         {
             pivotWorld = GetVisualCenterWorld(bar);

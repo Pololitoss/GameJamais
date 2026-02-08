@@ -1,54 +1,38 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PerteHPOrange : MonoBehaviour
 {
-    [Header("How much to shrink each click (world units)")]
-    [Tooltip("Amount removed from the bar width each click, in world units (e.g. 0.1)")]
-    [SerializeField]
-    private float shrinkWorldUnits = 0.3f;
-
-    [Header("Optional: set if the bar is not this object")]
-    [SerializeField]
-    private Transform bar;
+    [Header("References")]
+    [SerializeField] private HealthOrange health;
+    [SerializeField] private Transform bar;
 
     private float initialLocalWidth;
-    private float currentLocalWidth;
     private float initialRightLocalX;
 
     void Awake()
     {
-        if (bar == null)
-            bar = transform;
+        if (bar == null) bar = transform;
+        if (health == null) health = FindFirstObjectByType<HealthOrange>();
 
         // Mirror of the blue bar: keep the RIGHT edge fixed in LOCAL space.
-        // (Rotation-safe: do NOT use Renderer.bounds which is world-aligned.)
         initialLocalWidth = Mathf.Abs(bar.localScale.x);
-        currentLocalWidth = initialLocalWidth;
-
-        // Assumes the sprite is centered on its Transform.
-        initialRightLocalX = bar.localPosition.x + (currentLocalWidth * 0.5f);
+        initialRightLocalX = bar.localPosition.x + (initialLocalWidth * 0.5f);
     }
 
     void Update()
     {
-        // Unity 6 project is using the new Input System.
-        // This checks for a left mouse click and works even when legacy Input is disabled.
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            ShrinkOnce();
-        }
-    }
+        if (health == null)
+            return;
 
-    private void ShrinkOnce()
-    {
-        // Shrink by a constant amount in LOCAL space (stable even when rotating)
-        currentLocalWidth = Mathf.Max(0f, currentLocalWidth - Mathf.Max(0f, shrinkWorldUnits));
-        SetLocalWidth(bar, currentLocalWidth);
+        float ratio = (health.MaxHp <= 0) ? 0f : (float)health.CurrentHp / health.MaxHp;
+        ratio = Mathf.Clamp01(ratio);
 
-        // Keep RIGHT edge aligned (mirror): move center accordingly.
+        float targetLocalWidth = initialLocalWidth * ratio;
+        SetLocalWidth(bar, targetLocalWidth);
+
+        // Keep RIGHT edge aligned (mirror)
         Vector3 p = bar.localPosition;
-        p.x = initialRightLocalX - (currentLocalWidth * 0.5f);
+        p.x = initialRightLocalX - (targetLocalWidth * 0.5f);
         bar.localPosition = p;
     }
 

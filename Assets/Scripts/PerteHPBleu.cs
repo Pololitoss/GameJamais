@@ -1,67 +1,47 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PerteHPBleu : MonoBehaviour
 {
-    [Header("How much to shrink each click (world units)")]
-    [Tooltip("Amount removed from the bar width each click, in world units (e.g. 0.1)")]
-    [SerializeField]
-    private float shrinkWorldUnits = 0.3f;
+    [Header("References")]
+    [SerializeField] private HealthBleu health;
+    [SerializeField] private Transform bar;
 
-    [Header("Optional: set if the bar is not this object")]
-    [SerializeField]
-    private Transform bar;
-
-    [Header("Death menu (shown when HP reaches 0)")]
-    [SerializeField]
-    private DeathMenuController deathMenu;
+    [Header("Death menu (optional)")]
+    [SerializeField] private DeathMenuController deathMenu;
 
     private bool isDead;
-
     private float initialLocalWidth;
-    private float currentLocalWidth;
     private float initialLeftLocalX;
 
     void Awake()
     {
-        if (bar == null)
-            bar = transform;
+        if (bar == null) bar = transform;
+        if (health == null) health = FindFirstObjectByType<HealthBleu>();
 
-        // IMPORTANT: comme la barre peut tourner, on ne doit PAS utiliser
-        // r.bounds.size.x (qui est en WORLD et dépend de la rotation).
-        // On travaille en LOCAL: la "largeur" = scale.x de l'objet.
+        // Rotation-safe: do NOT use Renderer.bounds (world). Use localScale.x as width.
         initialLocalWidth = Mathf.Abs(bar.localScale.x);
-        currentLocalWidth = initialLocalWidth;
 
-        // Keep the LEFT edge fixed in LOCAL space.
-        // Assumes the sprite is centered on its Transform.
-        initialLeftLocalX = bar.localPosition.x - (currentLocalWidth * 0.5f);
+        // Keep LEFT edge fixed in local space.
+        initialLeftLocalX = bar.localPosition.x - (initialLocalWidth * 0.5f);
     }
 
     void Update()
     {
-        // Unity 6 project is using the new Input System.
-        // Right click -> Blue takes damage.
-        // Works even when legacy Input is disabled.
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            ShrinkOnce();
-        }
-    }
+        if (health == null)
+            return;
 
-    private void ShrinkOnce()
-    {
-        // Réduit la largeur d'une taille constante dans l'espace LOCAL.
-        // (C'est stable même si l'objet tourne.)
-        currentLocalWidth = Mathf.Max(0f, currentLocalWidth - Mathf.Max(0f, shrinkWorldUnits));
-        SetLocalWidth(bar, currentLocalWidth);
+        float ratio = (health.MaxHp <= 0) ? 0f : (float)health.CurrentHp / health.MaxHp;
+        ratio = Mathf.Clamp01(ratio);
 
-        // Re-align to the left: keep left edge constant, move center accordingly.
+        float targetLocalWidth = initialLocalWidth * ratio;
+        SetLocalWidth(bar, targetLocalWidth);
+
+        // Keep left edge aligned and adjust center.
         Vector3 p = bar.localPosition;
-        p.x = initialLeftLocalX + (currentLocalWidth * 0.5f);
+        p.x = initialLeftLocalX + (targetLocalWidth * 0.5f);
         bar.localPosition = p;
 
-        if (!isDead && currentLocalWidth <= 0f)
+        if (!isDead && health.CurrentHp <= 0)
         {
             isDead = true;
             if (deathMenu != null)

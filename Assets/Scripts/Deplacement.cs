@@ -18,6 +18,27 @@ public class Deplacement : MonoBehaviour
     public Transform groundCheckLeft;
     public Transform groundCheckRight;
 
+    [Header("Combat (hitbox)")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private Vector2 attackBoxSize = new Vector2(1.2f, 0.8f);
+    [SerializeField] private LayerMask targetLayers = ~0; // by default, hit everything (filtered by component type)
+
+    [Header("Damage")]
+    [SerializeField] private int attackHit1Damage = 10;
+    [SerializeField] private int attackHit2Damage = 25;
+    [SerializeField] private bool oneHitPerAttack = true;
+
+    [Header("AttackPoint auto facing (optional)")]
+    [SerializeField] private bool autoFaceAttackPoint = true;
+    [SerializeField] private float attackPointOffsetX = 0.6f;
+
+    private bool hasHitThisAttack;
+
+    [Header("Facing")]
+    [Tooltip("Minimum absolute input X to update facing direction.")]
+    [SerializeField] private float facingDeadzone = 0.05f;
+    private int facingSign = 1; // 1 => right, -1 => left
+
     void OnEnable()
     {
         var playerInput = GetComponent<PlayerInput>();
@@ -70,7 +91,19 @@ public class Deplacement : MonoBehaviour
         float characterVelocity = Mathf.Abs(rb.linearVelocity.x);
         animator.SetFloat("Speed", characterVelocity);
 
-        Flip(rb.linearVelocity.x);
+        Flip(moveInput.x);
+    }
+
+    void LateUpdate()
+    {
+        if (!autoFaceAttackPoint || attackPoint == null || spriteRenderer == null)
+            return;
+
+        // Place attackPoint in front of the sprite, depending on facing.
+        Vector3 lp = attackPoint.localPosition;
+        float x = Mathf.Abs(attackPointOffsetX);
+        lp.x = spriteRenderer.flipX ? -x : x;
+        attackPoint.localPosition = lp;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -114,6 +147,56 @@ public class Deplacement : MonoBehaviour
     {
         Debug.Log("OnAttackFinished Bleu appelé!");
         animator.SetBool("IsAttacking", false);
+
+        hasHitThisAttack = false;
+    }
+
+    // Animation Event (impact frame): weak
+    public void AttackHit1()
+    {
+        DoAttackHit(attackHit1Damage);
+    }
+
+    // Animation Event (impact frame): strong
+    public void AttackHit2()
+    {
+        DoAttackHit(attackHit2Damage);
+    }
+
+    // Compatibility: if your old animation event calls AttackHit()
+    public void AttackHit()
+    {
+        AttackHit1();
+    }
+
+    private void DoAttackHit(int damage)
+    {
+        if (attackPoint == null)
+        {
+            Debug.LogWarning("[Bleu] attackPoint is not set.");
+            return;
+        }
+
+        if (oneHitPerAttack && hasHitThisAttack)
+            return;
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackBoxSize, 0f, targetLayers);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i] == null) continue;
+            if (hits[i].attachedRigidbody != null && hits[i].attachedRigidbody.gameObject == gameObject) continue;
+            if (hits[i].gameObject == gameObject) continue;
+
+            // Bleu can only damage Orange
+            if (hits[i].TryGetComponent<HealthOrange>(out var healthOrange))
+            {
+                healthOrange.TakeDamage(damage);
+                hasHitThisAttack = true;
+
+                if (oneHitPerAttack)
+                    break;
+            }
+        }
     }
 
     void MovePlayer(float _horizontalMvt){
@@ -132,11 +215,23 @@ public class Deplacement : MonoBehaviour
         }
     }
 
-    void Flip(float _velocity){
-        if(_velocity > 0.1f){
-            spriteRenderer.flipX = false;
-        }else if(_velocity < -0.1f){
-            spriteRenderer.flipX = true;
-        }
+    void Flip(float inputX){
+        if (spriteRenderer == null) return;
+
+        if (inputX > facingDeadzone)
+            facingSign = 1;
+        else if (inputX < -facingDeadzone)
+            facingSign = -1;
+
+        // In this project: flipX=true means facing left.
+        spriteRenderer.flipX = (facingSign < 0);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(attackPoint.position, attackBoxSize);
     }
 }

@@ -18,6 +18,33 @@ public class DeplacementOrange : MonoBehaviour
     public Transform groundCheckLeft;
     public Transform groundCheckRight;
 
+    [Header("Combat (hitbox)")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private Vector2 attackBoxSize = new Vector2(1.2f, 0.8f);
+    [SerializeField] private LayerMask targetLayers = ~0;
+
+    [Header("Damage")]
+    [SerializeField] private int attackHit1Damage = 10;
+    [SerializeField] private int attackHit2Damage = 25;
+    [SerializeField] private bool oneHitPerAttack = true;
+
+    [Header("AttackPoint auto facing (optional)")]
+    [SerializeField] private bool autoFaceAttackPoint = true;
+    [SerializeField] private float attackPointOffsetX = 0.6f;
+
+    private bool hasHitThisAttack;
+
+    [Header("Combat safety")]
+    [Tooltip("Fail-safe: if the animation event OnAttackFinished isn't called, unlock movement after this many seconds. Set to 0 to disable.")]
+    [SerializeField] private float attackLockTimeout = 0.9f;
+
+    private float attackLockStartedAt = -999f;
+
+    [Header("Facing")]
+    [Tooltip("Minimum absolute input X to update facing direction.")]
+    [SerializeField] private float facingDeadzone = 0.05f;
+    private int facingSign = 1;
+
     void OnEnable()
     {
         var playerInput = GetComponent<PlayerInput>();
@@ -61,6 +88,17 @@ public class DeplacementOrange : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Fail-safe unlock in case the animation event doesn't fire.
+        if (attackLockTimeout > 0f && animator != null && animator.GetBool("IsAttacking"))
+        {
+            if (Time.time >= attackLockStartedAt + attackLockTimeout)
+            {
+                Debug.LogWarning("[Orange] Attack lock timeout reached -> forcing IsAttacking = false. (Check OnAttackFinished animation event)");
+                animator.SetBool("IsAttacking", false);
+                hasHitThisAttack = false;
+            }
+        }
+
         isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
 
         float horizontalMvt = moveInput.x * moveSpeed * Time.deltaTime;
@@ -70,7 +108,7 @@ public class DeplacementOrange : MonoBehaviour
         float characterVelocity = Mathf.Abs(rb.linearVelocity.x);
         animator.SetFloat("Speed", characterVelocity);
 
-        Flip(rb.linearVelocity.x);
+    Flip(moveInput.x);
         
         // Debug pour vérifier l'état de l'animation
         if(animator.GetBool("IsAttacking"))
@@ -81,6 +119,17 @@ public class DeplacementOrange : MonoBehaviour
                 Debug.Log($"Clip en cours: {clipInfo[0].clip.name} | NormalizedTime: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
             }
         }
+    }
+
+    void LateUpdate()
+    {
+        if (!autoFaceAttackPoint || attackPoint == null || spriteRenderer == null)
+            return;
+
+        Vector3 lp = attackPoint.localPosition;
+        float x = Mathf.Abs(attackPointOffsetX);
+        lp.x = spriteRenderer.flipX ? -x : x;
+        attackPoint.localPosition = lp;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -104,8 +153,11 @@ public class DeplacementOrange : MonoBehaviour
     {
         if (context.performed)
         {
+            hasHitThisAttack = false;
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackBite");
+
+            attackLockStartedAt = Time.time;
         }
     }
 
@@ -116,9 +168,13 @@ public class DeplacementOrange : MonoBehaviour
             AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
             Debug.Log($"AttackTete déclenchée! État actuel: {currentState.shortNameHash}");
             Debug.Log($"IsAttacking avant: {animator.GetBool("IsAttacking")}");
+
+            hasHitThisAttack = false;
             
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackTete");
+
+            attackLockStartedAt = Time.time;
             
             // Vérifier si le trigger existe
             foreach (AnimatorControllerParameter param in animator.parameters)
@@ -136,6 +192,56 @@ public class DeplacementOrange : MonoBehaviour
     {
         Debug.Log("OnAttackFinished Orange appelé!");
         animator.SetBool("IsAttacking", false);
+
+        hasHitThisAttack = false;
+    }
+
+    // Animation Event (impact frame): weak
+    public void AttackHit1()
+    {
+        DoAttackHit(attackHit1Damage);
+    }
+
+    // Animation Event (impact frame): strong
+    public void AttackHit2()
+    {
+        DoAttackHit(attackHit2Damage);
+    }
+
+    // Compatibility: if your old animation event calls AttackHit()
+    public void AttackHit()
+    {
+        AttackHit1();
+    }
+
+    private void DoAttackHit(int damage)
+    {
+        if (attackPoint == null)
+        {
+            Debug.LogWarning("[Orange] attackPoint is not set.");
+            return;
+        }
+
+        if (oneHitPerAttack && hasHitThisAttack)
+            return;
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackBoxSize, 0f, targetLayers);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i] == null) continue;
+            if (hits[i].attachedRigidbody != null && hits[i].attachedRigidbody.gameObject == gameObject) continue;
+            if (hits[i].gameObject == gameObject) continue;
+
+            // Orange can only damage Bleu
+            if (hits[i].TryGetComponent<HealthBleu>(out var healthBleu))
+            {
+                healthBleu.TakeDamage(damage);
+                hasHitThisAttack = true;
+
+                if (oneHitPerAttack)
+                    break;
+            }
+        }
     }
 
     void MovePlayer(float _horizontalMvt){
@@ -154,11 +260,22 @@ public class DeplacementOrange : MonoBehaviour
         }
     }
 
-    void Flip(float _velocity){
-        if(_velocity > 0.1f){
-            spriteRenderer.flipX = false;
-        }else if(_velocity < -0.1f){
-            spriteRenderer.flipX = true;
-        }
+    void Flip(float inputX){
+        if (spriteRenderer == null) return;
+
+        if (inputX > facingDeadzone)
+            facingSign = 1;
+        else if (inputX < -facingDeadzone)
+            facingSign = -1;
+
+        spriteRenderer.flipX = (facingSign < 0);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.color = new Color(1f, 0.5f, 0f);
+        Gizmos.DrawWireCube(attackPoint.position, attackBoxSize);
     }
 }

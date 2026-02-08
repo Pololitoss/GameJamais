@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: 9cfbef94a2f313999ad2ddd6bf6b225f
+guid: 55c6200d16b0debc7a10d6e6ac73c0fe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4457663794195168306
-    second: Hit_0
+      213: 7281562425652716138
+    second: Hit2_0
   - first:
-      213: -5364657433725072944
-    second: Hit_1
+      213: -3054853716382423002
+    second: Hit2_1
+  - first:
+      213: 5487866315494388361
+    second: Hit2_2
+  - first:
+      213: -2913854153839614960
+    second: Hit2_3
+  - first:
+      213: -8024182792886584107
+    second: Hit2_4
+  - first:
+      213: -6018513298622001661
+    second: Hit2_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,13 +141,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hit_0
+      name: Hit2_0
       rect:
         serializedVersion: 2
-        x: 41
+        x: 34
         y: 26
-        width: 29
-        height: 86
+        width: 35
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +156,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 23c7f156a9dccdd30800000000000000
-      internalID: 4457663794195168306
+      spriteID: a62acde527e4d0560800000000000000
+      internalID: 7281562425652716138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hit_1
+      name: Hit2_1
       rect:
         serializedVersion: 2
         x: 150
         y: 27
-        width: 27
+        width: 55
         height: 86
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -166,8 +178,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d98829bc78ec85b0800000000000000
-      internalID: -5364657433725072944
+      spriteID: 6286e32fabafa95d0800000000000000
+      internalID: -3054853716382423002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit2_2
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 24
+        width: 65
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 982ffd58651d82c40800000000000000
+      internalID: 5487866315494388361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit2_3
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 57
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 014e719d519ef87d0800000000000000
+      internalID: -2913854153839614960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit2_4
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 25
+        width: 60
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc7139834064a090800000000000000
+      internalID: -8024182792886584107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit2_5
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 23
+        width: 29
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30ecba7da02f97ca0800000000000000
+      internalID: -6018513298622001661
       vertices: []
       indices: 
       edges: []
@@ -186,8 +286,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hit_0: 4457663794195168306
-      Hit_1: -5364657433725072944
+      Hit2_0: 7281562425652716138
+      Hit2_1: -3054853716382423002
+      Hit2_2: 5487866315494388361
+      Hit2_3: -2913854153839614960
+      Hit2_4: -8024182792886584107
+      Hit2_5: -6018513298622001661
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
