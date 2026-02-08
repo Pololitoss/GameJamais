@@ -33,6 +33,7 @@ public class Deplacement : MonoBehaviour
     [SerializeField] private float attackPointOffsetX = 0.6f;
 
     private bool hasHitThisAttack;
+    private bool hasHitThisAttack2;
 
     [Header("Health")]
     [SerializeField] private HealthBleu health;
@@ -153,6 +154,9 @@ public class Deplacement : MonoBehaviour
             return;
         if (context.performed)
         {
+            // Important when attacks are chained/spammed: re-arm hit for the new attack window.
+            hasHitThisAttack = false;
+            hasHitThisAttack2 = false;
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackBite");
         }
@@ -165,6 +169,10 @@ public class Deplacement : MonoBehaviour
         if (context.performed)
         {
             Debug.Log("AttackTete Bleu déclenchée!");
+
+            // Important when attacks are chained/spammed: re-arm hit for the new attack window.
+            hasHitThisAttack = false;
+            hasHitThisAttack2 = false;
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackTete");
         }
@@ -177,18 +185,19 @@ public class Deplacement : MonoBehaviour
         animator.SetBool("IsAttacking", false);
 
         hasHitThisAttack = false;
+        hasHitThisAttack2 = false;
     }
 
     // Animation Event (impact frame): weak
     public void AttackHit1()
     {
-        DoAttackHit(attackHit1Damage);
+        DoAttackHit(attackHit1Damage, 1);
     }
 
     // Animation Event (impact frame): strong
     public void AttackHit2()
     {
-        DoAttackHit(attackHit2Damage);
+        DoAttackHit(attackHit2Damage, 2);
     }
 
     // Compatibility: if your old animation event calls AttackHit()
@@ -197,7 +206,7 @@ public class Deplacement : MonoBehaviour
         AttackHit1();
     }
 
-    private void DoAttackHit(int damage)
+    private void DoAttackHit(int damage, int hitIndex)
     {
         if (attackPoint == null)
         {
@@ -205,8 +214,11 @@ public class Deplacement : MonoBehaviour
             return;
         }
 
-        if (oneHitPerAttack && hasHitThisAttack)
-            return;
+        if (oneHitPerAttack)
+        {
+            if (hitIndex == 1 && hasHitThisAttack) return;
+            if (hitIndex == 2 && hasHitThisAttack2) return;
+        }
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackBoxSize, 0f, targetLayers);
         for (int i = 0; i < hits.Length; i++)
@@ -219,7 +231,8 @@ public class Deplacement : MonoBehaviour
             if (hits[i].TryGetComponent<HealthOrange>(out var healthOrange))
             {
                 healthOrange.TakeDamage(damage);
-                hasHitThisAttack = true;
+                if (hitIndex == 1) hasHitThisAttack = true;
+                else if (hitIndex == 2) hasHitThisAttack2 = true;
 
                 if (oneHitPerAttack)
                     break;
