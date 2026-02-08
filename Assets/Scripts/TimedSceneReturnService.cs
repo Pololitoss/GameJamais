@@ -40,6 +40,12 @@ public class TimedSceneReturnService : MonoBehaviour
 
             if (!string.IsNullOrWhiteSpace(returnSceneName))
             {
+                // Persist current HP before returning to the original scene.
+                var bleu = FindFirstObjectByType<HealthBleu>();
+                var orange = FindFirstObjectByType<HealthOrange>();
+                if (bleu != null) GameState.Instance.SaveBleu(bleu);
+                if (orange != null) GameState.Instance.SaveOrange(orange);
+
                 Time.timeScale = 1f;
                 SceneManager.LoadScene(returnSceneName);
             }

@@ -73,4 +73,13 @@ public class HealthOrange : MonoBehaviour
 
         currentHp = Mathf.Min(maxHp, currentHp + amount);
     }
+
+    /// <summary>
+    /// Used by persistent state systems to restore HP after a scene load.
+    /// </summary>
+    public void SetHp(int newCurrentHp, int newMaxHp)
+    {
+        maxHp = Mathf.Max(1, newMaxHp);
+        currentHp = Mathf.Clamp(newCurrentHp, 0, maxHp);
+    }
 }

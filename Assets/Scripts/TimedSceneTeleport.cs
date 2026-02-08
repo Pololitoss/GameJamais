@@ -40,6 +40,12 @@ public class TimedSceneTeleport : MonoBehaviour
 
         triggered = true;
 
+    // Persist HP before changing scenes.
+    var bleu = FindFirstObjectByType<HealthBleu>();
+    var orange = FindFirstObjectByType<HealthOrange>();
+    if (bleu != null) GameState.Instance.SaveBleu(bleu);
+    if (orange != null) GameState.Instance.SaveOrange(orange);
+
         // Save return info before changing scenes.
         TimedSceneReturnService.StartTimedReturn(SceneManager.GetActiveScene().name, durationSeconds);
 
