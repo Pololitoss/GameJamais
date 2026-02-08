@@ -103,6 +103,7 @@ public class Deplacement : MonoBehaviour
     {
         if (context.performed)
         {
+            Debug.Log("AttackTete Bleu déclenchée!");
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackTete");
         }
@@ -111,10 +112,17 @@ public class Deplacement : MonoBehaviour
     // Méthode appelée par Animation Event à la fin de l'attaque
     public void OnAttackFinished()
     {
+        Debug.Log("OnAttackFinished Bleu appelé!");
         animator.SetBool("IsAttacking", false);
     }
 
     void MovePlayer(float _horizontalMvt){
+        // Ne pas bouger pendant l'attaque
+        if(animator.GetBool("IsAttacking"))
+        {
+            _horizontalMvt = 0;
+        }
+        
         Vector3 targetVelocity = new Vector2(_horizontalMvt, rb.linearVelocity.y);
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref velocity, .05f); //la on applique la vitesse au rb
 

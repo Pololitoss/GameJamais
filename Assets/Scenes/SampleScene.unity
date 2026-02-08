@@ -33929,7 +33929,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 604175594802062549, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
       propertyPath: m_DefaultActionMap
-      value: df70fa95-8a34-4494-b137-73ab6b9c7d37
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 604175594802062549, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2120228814673911605, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
       propertyPath: m_LocalPosition.x

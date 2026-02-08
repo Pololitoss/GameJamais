@@ -71,6 +71,16 @@ public class DeplacementOrange : MonoBehaviour
         animator.SetFloat("Speed", characterVelocity);
 
         Flip(rb.linearVelocity.x);
+        
+        // Debug pour vérifier l'état de l'animation
+        if(animator.GetBool("IsAttacking"))
+        {
+            AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            if (clipInfo.Length > 0)
+            {
+                Debug.Log($"Clip en cours: {clipInfo[0].clip.name} | NormalizedTime: {animator.GetCurrentAnimatorStateInfo(0).normalizedTime}");
+            }
+        }
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -103,19 +113,38 @@ public class DeplacementOrange : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("AttackTete déclenchée!");
+            AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
+            Debug.Log($"AttackTete déclenchée! État actuel: {currentState.shortNameHash}");
+            Debug.Log($"IsAttacking avant: {animator.GetBool("IsAttacking")}");
+            
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackTete");
+            
+            // Vérifier si le trigger existe
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == "AttackTete")
+                {
+                    Debug.Log($"Trigger 'AttackTete' trouvé, type: {param.type}");
+                }
+            }
         }
     }
 
     // Méthode appelée par Animation Event à la fin de l'attaque
     public void OnAttackFinished()
     {
+        Debug.Log("OnAttackFinished Orange appelé!");
         animator.SetBool("IsAttacking", false);
     }
 
     void MovePlayer(float _horizontalMvt){
+        // Ne pas bouger pendant l'attaque
+        if(animator.GetBool("IsAttacking"))
+        {
+            _horizontalMvt = 0;
+        }
+        
         Vector3 targetVelocity = new Vector2(_horizontalMvt, rb.linearVelocity.y);
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref velocity, .05f); //la on applique la vitesse au rb
 
