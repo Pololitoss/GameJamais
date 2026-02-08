@@ -7,15 +7,6 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "351f2ccd-1f9f-44bf-9bec-d62ac5c5f408",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "MoveOrange",
                     "type": "Value",
                     "id": "95baf7da-5c2b-4be0-b51c-003d262ad1a6",
@@ -23,15 +14,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "JumpOrange",
@@ -43,27 +25,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AttackBite",
-                    "type": "Button",
-                    "id": "87ef8ede-1bed-4729-96d0-6f255ce2cb5f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "AttackBiteOrange",
                     "type": "Button",
                     "id": "3f1dcc1f-2845-4153-bf2b-50914dcab08d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "AttackTete",
-                    "type": "Button",
-                    "id": "e39a171e-474d-42cf-a6c3-fa4bc4adfb72",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -82,17 +46,6 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "60503445-cbce-4915-8c90-9217488fc6f8",
-                    "path": "<Keyboard>/#(S)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "627ea335-6855-4cce-a0d2-26f636295f0b",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
@@ -101,61 +54,6 @@
                     "action": "JumpOrange",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "8cc4c721-98a3-4bf3-9eec-933c99d372ef",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "ab1d5af1-af36-42bd-8360-094c85b0ddea",
-                    "path": "<Touchscreen>/delta/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "c5aafdef-375e-4871-b2a9-08731077c4ae",
-                    "path": "<Keyboard>/#(Q)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "91343bd0-675c-45f3-9dd2-b7316801fb3b",
-                    "path": "<Keyboard>/#(A)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "3c5d591e-ed04-496e-a4d1-ec22c5f48c5a",
-                    "path": "<Keyboard>/#(X)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "2D Vector",
@@ -214,34 +112,12 @@
                 },
                 {
                     "name": "",
-                    "id": "be9626f6-1b07-44c0-976c-c7f8a9cb0961",
-                    "path": "<Keyboard>/#(F)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackBite",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a1b9edda-d66a-422c-b59b-482d17167cab",
                     "path": "<Keyboard>/numpad3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "AttackBiteOrange",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "52affcbe-ec78-45ba-911f-8f876deecb37",
-                    "path": "<Keyboard>/#(H)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackTete",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -854,6 +730,158 @@
                     "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Player2",
+            "id": "1633359f-5072-4550-bf5d-c32eb005e994",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "80f84343-a0ac-420f-82d7-3fc84a430b20",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "5e8fcdbc-0be1-4cd9-9b8d-0761adce2767",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "8638519d-b1ae-445b-ba55-08677b1215fe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AttackBite",
+                    "type": "Button",
+                    "id": "18ac68fe-6818-487d-8d8e-17679a8494c2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AttackTete",
+                    "type": "Button",
+                    "id": "eb428516-3392-4141-b2f1-e219065afd4c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a5354da1-17ba-407e-9e75-e0050b9fed8b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "5ae23e84-7dbf-45ff-9657-d5454eb900a0",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "2a8d8ba3-e6a4-4c2c-89ee-0964f0b81e58",
+                    "path": "<Touchscreen>/delta/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e345fe6d-7877-4959-bb72-a4072460743c",
+                    "path": "<Keyboard>/#(Q)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "8021633a-0afa-487b-be18-7c6db1646cae",
+                    "path": "<Keyboard>/#(A)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "ddf3a80d-4ed2-4d8a-96f5-49cbbf1888de",
+                    "path": "<Keyboard>/#(X)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8b04719b-d758-46cf-816c-e061fe3e235b",
+                    "path": "<Keyboard>/#(S)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d05eb7aa-2511-4c9c-b99a-92f75d9107cc",
+                    "path": "<Keyboard>/#(F)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackBite",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35805c5d-2dd1-4dd2-9350-fb4d0eeefe7b",
+                    "path": "<Keyboard>/#(H)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackTete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

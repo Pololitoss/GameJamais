@@ -49,6 +49,18 @@ public class DeplacementOrange : MonoBehaviour
     [Header("Health")]
     [SerializeField] private HealthOrange health;
 
+    [Header("Input (recommended for 2 players on 1 keyboard)")]
+    [Tooltip("Assign from InputSystem_Actions: MoveOrange. If not set, falls back to PlayerInput if present.")]
+    [SerializeField] private InputActionReference moveOrangeAction;
+    [Tooltip("Assign from InputSystem_Actions: JumpOrange.")]
+    [SerializeField] private InputActionReference jumpOrangeAction;
+    [Tooltip("Assign from InputSystem_Actions: AttackBiteOrange.")]
+    [SerializeField] private InputActionReference attackBiteOrangeAction;
+    [Tooltip("Assign from InputSystem_Actions: AttackTeteOrange.")]
+    [SerializeField] private InputActionReference attackTeteOrangeAction;
+
+    private PlayerInput playerInput;
+
     private void Awake()
     {
         if (health == null)
@@ -57,41 +69,85 @@ public class DeplacementOrange : MonoBehaviour
 
     void OnEnable()
     {
-        var playerInput = GetComponent<PlayerInput>();
-        if (playerInput != null)
+        // Recommended path: InputActionReference (no device pairing => 2 players can share one keyboard).
+        if (moveOrangeAction != null)
         {
-            var moveAction = playerInput.actions["MoveOrange"];
-            moveAction.performed += OnMove;
-            moveAction.canceled += OnMove;
-            
-            var jumpAction = playerInput.actions["JumpOrange"];
-            jumpAction.performed += OnJump;
-            
-            var attackBiteAction = playerInput.actions["AttackBiteOrange"];
-            attackBiteAction.performed += OnAttackBite;
-            
-            var attackTeteAction = playerInput.actions["AttackTeteOrange"];
-            attackTeteAction.performed += OnAttackTete;
+            moveOrangeAction.action.Enable();
+            moveOrangeAction.action.performed += OnMove;
+            moveOrangeAction.action.canceled += OnMove;
+        }
+
+        if (jumpOrangeAction != null)
+        {
+            jumpOrangeAction.action.Enable();
+            jumpOrangeAction.action.performed += OnJump;
+        }
+
+        if (attackBiteOrangeAction != null)
+        {
+            attackBiteOrangeAction.action.Enable();
+            attackBiteOrangeAction.action.performed += OnAttackBite;
+        }
+
+        if (attackTeteOrangeAction != null)
+        {
+            attackTeteOrangeAction.action.Enable();
+            attackTeteOrangeAction.action.performed += OnAttackTete;
+        }
+
+        // Backward compatible fallback: PlayerInput (may cause 1-keyboard/2-players issues in build).
+        if (moveOrangeAction == null && jumpOrangeAction == null && attackBiteOrangeAction == null && attackTeteOrangeAction == null)
+        {
+            playerInput = GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                var m = playerInput.actions["MoveOrange"];
+                m.performed += OnMove;
+                m.canceled += OnMove;
+
+                var j = playerInput.actions["JumpOrange"];
+                j.performed += OnJump;
+
+                var ab = playerInput.actions["AttackBiteOrange"];
+                ab.performed += OnAttackBite;
+
+                var at = playerInput.actions["AttackTeteOrange"];
+                at.performed += OnAttackTete;
+            }
         }
     }
 
     void OnDisable()
     {
-        var playerInput = GetComponent<PlayerInput>();
+        if (moveOrangeAction != null)
+        {
+            moveOrangeAction.action.performed -= OnMove;
+            moveOrangeAction.action.canceled -= OnMove;
+        }
+
+        if (jumpOrangeAction != null)
+            jumpOrangeAction.action.performed -= OnJump;
+
+        if (attackBiteOrangeAction != null)
+            attackBiteOrangeAction.action.performed -= OnAttackBite;
+
+        if (attackTeteOrangeAction != null)
+            attackTeteOrangeAction.action.performed -= OnAttackTete;
+
         if (playerInput != null)
         {
-            var moveAction = playerInput.actions["MoveOrange"];
-            moveAction.performed -= OnMove;
-            moveAction.canceled -= OnMove;
-            
-            var jumpAction = playerInput.actions["JumpOrange"];
-            jumpAction.performed -= OnJump;
-            
-            var attackBiteAction = playerInput.actions["AttackBiteOrange"];
-            attackBiteAction.performed -= OnAttackBite;
-            
-            var attackTeteAction = playerInput.actions["AttackTeteOrange"];
-            attackTeteAction.performed -= OnAttackTete;
+            var m = playerInput.actions["MoveOrange"];
+            m.performed -= OnMove;
+            m.canceled -= OnMove;
+
+            var j = playerInput.actions["JumpOrange"];
+            j.performed -= OnJump;
+
+            var ab = playerInput.actions["AttackBiteOrange"];
+            ab.performed -= OnAttackBite;
+
+            var at = playerInput.actions["AttackTeteOrange"];
+            at.performed -= OnAttackTete;
         }
     }
 

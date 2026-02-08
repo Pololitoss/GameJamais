@@ -379,6 +379,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2873076612763906800, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 945755705}
+    - target: {fileID: 2873076612763906800, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 3093421281502220329, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.66388
@@ -418,6 +426,14 @@ PrefabInstance:
     - target: {fileID: 3093421281502220329, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935970646213138847, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 945755705}
+    - target: {fileID: 4935970646213138847, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7158040926776668809, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
       propertyPath: m_Name
@@ -488,6 +504,10 @@ MonoBehaviour:
   attackLockTimeout: 0.9
   facingDeadzone: 0.05
   health: {fileID: 0}
+  moveOrangeAction: {fileID: 0}
+  jumpOrangeAction: {fileID: 0}
+  attackBiteOrangeAction: {fileID: 0}
+  attackTeteOrangeAction: {fileID: 0}
 --- !u!114 &420681309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,6 +1018,17 @@ MonoBehaviour:
   bleu: {fileID: 40564950}
   orange: {fileID: 420681309}
   showMenuDelaySeconds: 1.2
+--- !u!114 &945755705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3356180141681596199, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
+  m_PrefabInstance: {fileID: 945755695}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945755696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88316572287adaa8891c5e8dcc08cdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenuController
 --- !u!114 &1028453608 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1301606739009507189, guid: 14f128bb53495c0248230cc14e293fea, type: 3}

@@ -35880,8 +35880,20 @@ PrefabInstance:
       value: StickOrange
       objectReference: {fileID: 0}
     - target: {fileID: 7246876882660743236, guid: 858010067fbb0c83dbc771519368535c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246876882660743236, guid: 858010067fbb0c83dbc771519368535c, type: 3}
       propertyPath: m_DefaultActionMap
-      value: df70fa95-8a34-4494-b137-73ab6b9c7d37
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246876882660743236, guid: 858010067fbb0c83dbc771519368535c, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246876882660743236, guid: 858010067fbb0c83dbc771519368535c, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8197016916051722129, guid: 858010067fbb0c83dbc771519368535c, type: 3}
       propertyPath: m_Sprite
@@ -36054,6 +36066,10 @@ MonoBehaviour:
   attackLockTimeout: 0.9
   facingDeadzone: 0.05
   health: {fileID: 0}
+  moveOrangeAction: {fileID: 6319545204527332575, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  jumpOrangeAction: {fileID: 5474222732457742252, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackBiteOrangeAction: {fileID: -2875396767358042851, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackTeteOrangeAction: {fileID: 3286558324952652122, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!4 &8387243691273625664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 800845212238933556, guid: 858010067fbb0c83dbc771519368535c, type: 3}
@@ -36099,12 +36115,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 604175594802062549, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 604175594802062549, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
       propertyPath: m_DefaultActionMap
-      value: Player
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 604175594802062549, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
       propertyPath: m_DefaultControlScheme
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 604175594802062549, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1566067298504109277, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -36159,9 +36183,25 @@ PrefabInstance:
       value: StickBleu
       objectReference: {fileID: 0}
     - target: {fileID: 8083018251939679123, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: jumpAction
+      value: 
+      objectReference: {fileID: -6638430151563542266, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: 8083018251939679123, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: moveAction
+      value: 
+      objectReference: {fileID: 889468124929075233, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: 8083018251939679123, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
       propertyPath: attackPoint
       value: 
       objectReference: {fileID: 2144005268}
+    - target: {fileID: 8083018251939679123, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: attackBiteAction
+      value: 
+      objectReference: {fileID: -6112020948860062767, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: 8083018251939679123, guid: 893b2ffacf4eecd91a9a19bb93b11995, type: 3}
+      propertyPath: attackTeteAction
+      value: 
+      objectReference: {fileID: -3933252765107884706, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

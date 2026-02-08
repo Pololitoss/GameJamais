@@ -38,6 +38,18 @@ public class Deplacement : MonoBehaviour
     [Header("Health")]
     [SerializeField] private HealthBleu health;
 
+    [Header("Input (recommended for 2 players on 1 keyboard)")]
+    [Tooltip("Assign from InputSystem_Actions: Move (Bleu). If not set, falls back to PlayerInput if present.")]
+    [SerializeField] private InputActionReference moveAction;
+    [Tooltip("Assign from InputSystem_Actions: Jump (Bleu).")]
+    [SerializeField] private InputActionReference jumpAction;
+    [Tooltip("Assign from InputSystem_Actions: AttackBite (Bleu).")]
+    [SerializeField] private InputActionReference attackBiteAction;
+    [Tooltip("Assign from InputSystem_Actions: AttackTete (Bleu).")]
+    [SerializeField] private InputActionReference attackTeteAction;
+
+    private PlayerInput playerInput;
+
     [Header("Facing")]
     [Tooltip("Minimum absolute input X to update facing direction.")]
     [SerializeField] private float facingDeadzone = 0.05f;
@@ -51,41 +63,85 @@ public class Deplacement : MonoBehaviour
 
     void OnEnable()
     {
-        var playerInput = GetComponent<PlayerInput>();
-        if (playerInput != null)
+        // Recommended path: InputActionReference (no device pairing => 2 players can share one keyboard).
+        if (moveAction != null)
         {
-            var moveAction = playerInput.actions["Move"];
-            moveAction.performed += OnMove;
-            moveAction.canceled += OnMove;
-            
-            var jumpAction = playerInput.actions["Jump"];
-            jumpAction.performed += OnJump;
-            
-            var attackBiteAction = playerInput.actions["AttackBite"];
-            attackBiteAction.performed += OnAttackBite;
-            
-            var attackTeteAction = playerInput.actions["AttackTete"];
-            attackTeteAction.performed += OnAttackTete;
+            moveAction.action.Enable();
+            moveAction.action.performed += OnMove;
+            moveAction.action.canceled += OnMove;
+        }
+
+        if (jumpAction != null)
+        {
+            jumpAction.action.Enable();
+            jumpAction.action.performed += OnJump;
+        }
+
+        if (attackBiteAction != null)
+        {
+            attackBiteAction.action.Enable();
+            attackBiteAction.action.performed += OnAttackBite;
+        }
+
+        if (attackTeteAction != null)
+        {
+            attackTeteAction.action.Enable();
+            attackTeteAction.action.performed += OnAttackTete;
+        }
+
+        // Backward compatible fallback: PlayerInput (may cause 1-keyboard/2-players issues in build).
+        if (moveAction == null && jumpAction == null && attackBiteAction == null && attackTeteAction == null)
+        {
+            playerInput = GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                var m = playerInput.actions["Move"];
+                m.performed += OnMove;
+                m.canceled += OnMove;
+
+                var j = playerInput.actions["Jump"];
+                j.performed += OnJump;
+
+                var ab = playerInput.actions["AttackBite"];
+                ab.performed += OnAttackBite;
+
+                var at = playerInput.actions["AttackTete"];
+                at.performed += OnAttackTete;
+            }
         }
     }
 
     void OnDisable()
     {
-        var playerInput = GetComponent<PlayerInput>();
+        if (moveAction != null)
+        {
+            moveAction.action.performed -= OnMove;
+            moveAction.action.canceled -= OnMove;
+        }
+
+        if (jumpAction != null)
+            jumpAction.action.performed -= OnJump;
+
+        if (attackBiteAction != null)
+            attackBiteAction.action.performed -= OnAttackBite;
+
+        if (attackTeteAction != null)
+            attackTeteAction.action.performed -= OnAttackTete;
+
         if (playerInput != null)
         {
-            var moveAction = playerInput.actions["Move"];
-            moveAction.performed -= OnMove;
-            moveAction.canceled -= OnMove;
-            
-            var jumpAction = playerInput.actions["Jump"];
-            jumpAction.performed -= OnJump;
-            
-            var attackBiteAction = playerInput.actions["AttackBite"];
-            attackBiteAction.performed -= OnAttackBite;
-            
-            var attackTeteAction = playerInput.actions["AttackTete"];
-            attackTeteAction.performed -= OnAttackTete;
+            var m = playerInput.actions["Move"];
+            m.performed -= OnMove;
+            m.canceled -= OnMove;
+
+            var j = playerInput.actions["Jump"];
+            j.performed -= OnJump;
+
+            var ab = playerInput.actions["AttackBite"];
+            ab.performed -= OnAttackBite;
+
+            var at = playerInput.actions["AttackTete"];
+            at.performed -= OnAttackTete;
         }
     }
 
