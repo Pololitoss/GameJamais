@@ -34,10 +34,19 @@ public class Deplacement : MonoBehaviour
 
     private bool hasHitThisAttack;
 
+    [Header("Health")]
+    [SerializeField] private HealthBleu health;
+
     [Header("Facing")]
     [Tooltip("Minimum absolute input X to update facing direction.")]
     [SerializeField] private float facingDeadzone = 0.05f;
     private int facingSign = 1; // 1 => right, -1 => left
+
+    private void Awake()
+    {
+        if (health == null)
+            health = GetComponent<HealthBleu>();
+    }
 
     void OnEnable()
     {
@@ -82,6 +91,14 @@ public class Deplacement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (health != null && health.IsDead)
+        {
+            // Stop horizontal movement when dead.
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            animator.SetFloat("Speed", 0f);
+            return;
+        }
+
         isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
 
         float horizontalMvt = moveInput.x * moveSpeed * Time.deltaTime;
@@ -108,11 +125,18 @@ public class Deplacement : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
         moveInput = context.ReadValue<Vector2>();
     }
 
     private void OnJump(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+            return;
         if(context.performed && (isGrounded || doubleJump<1))
         {
             doubleJump ++;
@@ -125,6 +149,8 @@ public class Deplacement : MonoBehaviour
 
     private void OnAttackBite(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+            return;
         if (context.performed)
         {
             animator.SetBool("IsAttacking", true);
@@ -134,6 +160,8 @@ public class Deplacement : MonoBehaviour
 
     private void OnAttackTete(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+            return;
         if (context.performed)
         {
             Debug.Log("AttackTete Bleu déclenchée!");

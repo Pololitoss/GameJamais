@@ -45,6 +45,15 @@ public class DeplacementOrange : MonoBehaviour
     [SerializeField] private float facingDeadzone = 0.05f;
     private int facingSign = 1;
 
+    [Header("Health")]
+    [SerializeField] private HealthOrange health;
+
+    private void Awake()
+    {
+        if (health == null)
+            health = GetComponent<HealthOrange>();
+    }
+
     void OnEnable()
     {
         var playerInput = GetComponent<PlayerInput>();
@@ -88,6 +97,13 @@ public class DeplacementOrange : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (health != null && health.IsDead)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            animator.SetFloat("Speed", 0f);
+            return;
+        }
+
         // Fail-safe unlock in case the animation event doesn't fire.
         if (attackLockTimeout > 0f && animator != null && animator.GetBool("IsAttacking"))
         {
@@ -134,11 +150,18 @@ public class DeplacementOrange : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
         moveInput = context.ReadValue<Vector2>();
     }
 
     private void OnJump(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+            return;
         if(context.performed && (isGrounded || doubleJump<1))
         {
             doubleJump ++;
@@ -151,6 +174,8 @@ public class DeplacementOrange : MonoBehaviour
 
     private void OnAttackBite(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+            return;
         if (context.performed)
         {
             hasHitThisAttack = false;
@@ -163,6 +188,8 @@ public class DeplacementOrange : MonoBehaviour
 
     private void OnAttackTete(InputAction.CallbackContext context)
     {
+        if (health != null && health.IsDead)
+            return;
         if (context.performed)
         {
             AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);

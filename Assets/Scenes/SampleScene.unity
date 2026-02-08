@@ -31170,6 +31170,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   hitTriggerName: Hit
   hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
 --- !u!1 &512713338
 GameObject:
   m_ObjectHideFlags: 0
@@ -31596,6 +31598,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabc478025200469788c2dd7ff23a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ApplySavedHpOnStart
+--- !u!114 &945387049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352077885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0437ea8b2265cd13f93db0c542e2397c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathManager
+  deathMenu: {fileID: 8676864172549001845}
+  bleu: {fileID: 407302127}
+  orange: {fileID: 8387243691273625665}
+  showMenuDelaySeconds: 1.2
 --- !u!1 &983527711
 GameObject:
   m_ObjectHideFlags: 0
@@ -35155,6 +35173,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 407302126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &757351512483617218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5511813
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.452023
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8012596979285395041, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_Name
+      value: DeathMenu
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
 --- !u!50 &796011965155400820 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 8772429830465670206, guid: 858010067fbb0c83dbc771519368535c, type: 3}
@@ -35254,6 +35329,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6979196750812432862, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 945387043}
+    - targetCorrespondingSourceObject: {fileID: 6979196750812432862, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 945387049}
   m_SourcePrefab: {fileID: 100100000, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
 --- !u!1001 &5355150619440352674
 PrefabInstance:
@@ -35387,6 +35465,10 @@ PrefabInstance:
       propertyPath: health
       value: 
       objectReference: {fileID: 407302127}
+    - target: {fileID: 9010187062982859367, guid: 215bbe8120512dd9a9e153d5eddcfd0b, type: 3}
+      propertyPath: deathMenu
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9051836342044524479, guid: 215bbe8120512dd9a9e153d5eddcfd0b, type: 3}
       propertyPath: m_LocalScale.x
       value: 18.671387
@@ -35647,6 +35729,7 @@ MonoBehaviour:
   attackPointOffsetX: 0.6
   attackLockTimeout: 0.9
   facingDeadzone: 0.05
+  health: {fileID: 0}
 --- !u!4 &8387243691273625664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 800845212238933556, guid: 858010067fbb0c83dbc771519368535c, type: 3}
@@ -35670,6 +35753,19 @@ MonoBehaviour:
   animator: {fileID: 0}
   hitTriggerName: Hit
   hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
+--- !u!114 &8676864172549001845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2972540137346518384, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+  m_PrefabInstance: {fileID: 757351512483617218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f9cb423e4766f46ac07388c909e54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathMenuController
 --- !u!1001 &8995984789596774168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35771,3 +35867,4 @@ SceneRoots:
   - {fileID: 1448441691}
   - {fileID: 2005282908}
   - {fileID: 860667478}
+  - {fileID: 757351512483617218}

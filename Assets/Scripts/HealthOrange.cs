@@ -21,6 +21,13 @@ public class HealthOrange : MonoBehaviour
     [Tooltip("Optional int parameter name if you want multiple hit reactions (0/1/2...). Leave empty to disable.")]
     [SerializeField] private string hitVariantIntName = "";
 
+    [Header("Death reaction (optional)")]
+    [Tooltip("Trigger name used to play the death animation.")]
+    [SerializeField] private string dieTriggerName = "Die";
+
+    [Tooltip("Bool parameter set to true when dead, to prevent death animation from being cancelled.")]
+    [SerializeField] private string isDeadBoolName = "IsDead";
+
     private float lastDamageTime = -999f;
 
     public int MaxHp => maxHp;
@@ -30,6 +37,15 @@ public class HealthOrange : MonoBehaviour
     /// Fired when damage is applied. Args: (appliedDamage, currentHp, maxHp)
     /// </summary>
     public event Action<int, int, int> Damaged;
+
+    /// <summary>
+    /// Fired once when HP reaches 0.
+    /// </summary>
+    public event Action Died;
+
+    private bool hasDied;
+
+    public bool IsDead => currentHp <= 0;
 
     private void Awake()
     {
@@ -64,6 +80,16 @@ public class HealthOrange : MonoBehaviour
         }
 
         Damaged?.Invoke(applied, currentHp, maxHp);
+
+        if (!hasDied && currentHp <= 0)
+        {
+            hasDied = true;
+            if (animator != null && !string.IsNullOrWhiteSpace(dieTriggerName))
+                animator.SetTrigger(dieTriggerName);
+            if (animator != null && !string.IsNullOrWhiteSpace(isDeadBoolName))
+                animator.SetBool(isDeadBoolName, true);
+            Died?.Invoke();
+        }
     }
 
     public void Heal(int amount)
@@ -81,5 +107,10 @@ public class HealthOrange : MonoBehaviour
     {
         maxHp = Mathf.Max(1, newMaxHp);
         currentHp = Mathf.Clamp(newCurrentHp, 0, maxHp);
+
+        hasDied = currentHp <= 0;
+
+        if (animator != null && !string.IsNullOrWhiteSpace(isDeadBoolName))
+            animator.SetBool(isDeadBoolName, currentHp <= 0);
     }
 }

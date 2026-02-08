@@ -147,6 +147,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   hitTriggerName: Hit
   hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
 --- !u!1 &61495546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7158040926776668809, guid: 0a515eb2621f44ee48323efae434ae5c, type: 3}
@@ -485,6 +487,7 @@ MonoBehaviour:
   attackPointOffsetX: 0.6
   attackLockTimeout: 0.9
   facingDeadzone: 0.05
+  health: {fileID: 0}
 --- !u!114 &420681309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +506,81 @@ MonoBehaviour:
   animator: {fileID: 0}
   hitTriggerName: Hit
   hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
+--- !u!1001 &708944619
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 495.1881
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 361.67343
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777037103966807233, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151175282506974744, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1028453608}
+    - target: {fileID: 3151175282506974744, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252351561788403063, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1028453608}
+    - target: {fileID: 5252351561788403063, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8012596979285395041, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+      propertyPath: m_Name
+      value: DeathMenu
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
 --- !u!4 &732608905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8436351895100823189, guid: 858010067fbb0c83dbc771519368535c, type: 3}
@@ -883,6 +961,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6979196750812432862, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 945755697}
+    - targetCorrespondingSourceObject: {fileID: 6979196750812432862, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 945755703}
   m_SourcePrefab: {fileID: 100100000, guid: c07b46e2072770de882191d240ed3eb3, type: 3}
 --- !u!1 &945755696 stripped
 GameObject:
@@ -901,6 +982,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabc478025200469788c2dd7ff23a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ApplySavedHpOnStart
+--- !u!114 &945755703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945755696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0437ea8b2265cd13f93db0c542e2397c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathManager
+  deathMenu: {fileID: 1028453609}
+  bleu: {fileID: 40564950}
+  orange: {fileID: 420681309}
+  showMenuDelaySeconds: 1.2
+--- !u!114 &1028453608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1301606739009507189, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+  m_PrefabInstance: {fileID: 708944619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e17c6c0c0b52dfd28cf74dd0cb0bf38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathMenuButtons
+--- !u!114 &1028453609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2972540137346518384, guid: 14f128bb53495c0248230cc14e293fea, type: 3}
+  m_PrefabInstance: {fileID: 708944619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f9cb423e4766f46ac07388c909e54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathMenuController
 --- !u!1 &1119219099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,3 +2266,4 @@ SceneRoots:
   - {fileID: 945755695}
   - {fileID: 213530888}
   - {fileID: 1974446420}
+  - {fileID: 708944619}
