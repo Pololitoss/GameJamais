@@ -1,16 +1,19 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PerteHPOrange : MonoBehaviour
 {
-    [Header("How much to shrink each click (world units)")]
-    [Tooltip("Amount removed from the bar width each click, in world units (e.g. 0.1)")]
-    [SerializeField]
-    private float shrinkWorldUnits = 0.3f;
+    [Header("Target")]
+    [Tooltip("Référence vers la vie du joueur Orange.")]
+    [SerializeField] private HealthOrange health;
 
     [Header("Optional: set if the bar is not this object")]
     [SerializeField]
     private Transform bar;
+
+    [Header("Death menu (optional)")]
+    [SerializeField] private DeathMenuController deathMenu;
+
+    private bool isDead;
 
     private float initialLocalWidth;
     private float currentLocalWidth;
@@ -20,6 +23,9 @@ public class PerteHPOrange : MonoBehaviour
     {
         if (bar == null)
             bar = transform;
+
+        if (health == null)
+            health = GetComponentInParent<HealthOrange>();
 
         // Mirror of the blue bar: keep the RIGHT edge fixed in LOCAL space.
         // (Rotation-safe: do NOT use Renderer.bounds which is world-aligned.)
@@ -32,23 +38,27 @@ public class PerteHPOrange : MonoBehaviour
 
     void Update()
     {
-        // Unity 6 project is using the new Input System.
-        // This checks for a left mouse click and works even when legacy Input is disabled.
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        if (health == null)
+            return;
+
+        float ratio = (health.MaxHp > 0) ? Mathf.Clamp01((float)health.CurrentHp / health.MaxHp) : 1f;
+        currentLocalWidth = initialLocalWidth * ratio;
+        ApplyWidthAndAlignRight(currentLocalWidth);
+
+        if (!isDead && health.CurrentHp <= 0)
         {
-            ShrinkOnce();
+            isDead = true;
+            if (deathMenu != null)
+                deathMenu.Show();
         }
     }
 
-    private void ShrinkOnce()
+    private void ApplyWidthAndAlignRight(float targetLocalWidth)
     {
-        // Shrink by a constant amount in LOCAL space (stable even when rotating)
-        currentLocalWidth = Mathf.Max(0f, currentLocalWidth - Mathf.Max(0f, shrinkWorldUnits));
-        SetLocalWidth(bar, currentLocalWidth);
+        SetLocalWidth(bar, targetLocalWidth);
 
-        // Keep RIGHT edge aligned (mirror): move center accordingly.
         Vector3 p = bar.localPosition;
-        p.x = initialRightLocalX - (currentLocalWidth * 0.5f);
+        p.x = initialRightLocalX - (targetLocalWidth * 0.5f);
         bar.localPosition = p;
     }
 

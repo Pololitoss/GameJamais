@@ -18,6 +18,27 @@ public class Deplacement : MonoBehaviour
     public Transform groundCheckLeft;
     public Transform groundCheckRight;
 
+    [Header("Attack")]
+    [Tooltip("Point devant le bleu d'où part la zone de hit (child Transform conseillé).")]
+    [SerializeField] private Transform attackPoint;
+
+    [Tooltip("Distance de l'attackPoint par rapport au pivot du joueur (en local X). Utilisé si attackPoint est un child.")]
+    [SerializeField] private float attackPointOffsetX = 0.8f;
+
+    [Tooltip("Taille de la hitbox (unités monde).")]
+    [SerializeField] private Vector2 attackBoxSize = new Vector2(1.2f, 0.8f);
+
+    [Tooltip("Dégâts de l'attaque 1 (faible) vers l'Orange.")]
+    [SerializeField] private int damageHit1ToOrange = 1;
+
+    [Tooltip("Dégâts de l'attaque 2 (forte) vers l'Orange.")]
+    [SerializeField] private int damageHit2ToOrange = 2;
+
+    [Tooltip("Empêche plusieurs hits dans la même animation.")]
+    [SerializeField] private bool oneHitPerAttack = true;
+
+    private bool hasHitThisAttack;
+
     void OnEnable()
     {
         var playerInput = GetComponent<PlayerInput>();
@@ -96,6 +117,7 @@ public class Deplacement : MonoBehaviour
         {
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackBite");
+            hasHitThisAttack = false;
         }
     }
 
@@ -105,6 +127,48 @@ public class Deplacement : MonoBehaviour
         {
             animator.SetBool("IsAttacking", true);
             animator.SetTrigger("AttackTete");
+            hasHitThisAttack = false;
+        }
+    }
+
+    // Compat si tu avais déjà mis un event AttackHit: ça fera l'attaque 1.
+    public void AttackHit() => AttackHit1();
+
+    // Animation Event: à placer au frame où le coup touche (attaque 1 = faible).
+    public void AttackHit1()
+    {
+        DoAttackHit(damageHit1ToOrange);
+    }
+
+    // Animation Event: à placer au frame où le coup touche (attaque 2 = forte).
+    public void AttackHit2()
+    {
+        DoAttackHit(damageHit2ToOrange);
+    }
+
+    private void DoAttackHit(int damage)
+    {
+        if (oneHitPerAttack && hasHitThisAttack)
+            return;
+
+        if (attackPoint == null)
+        {
+            Debug.LogWarning("[Deplacement/Bleu] attackPoint n'est pas assigné.");
+            return;
+        }
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackBoxSize, 0f);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Collider2D c = hits[i];
+            if (c == null) continue;
+            if (c.gameObject == gameObject) continue;
+
+            if (c.TryGetComponent<HealthOrange>(out var healthOrange))
+            {
+                healthOrange.TakeDamage(damage);
+                hasHitThisAttack = true;
+            }
         }
     }
 
@@ -112,6 +176,28 @@ public class Deplacement : MonoBehaviour
     public void OnAttackFinished()
     {
         animator.SetBool("IsAttacking", false);
+        hasHitThisAttack = false;
+    }
+
+    private void LateUpdate()
+    {
+        // Place automatiquement l'attackPoint devant le joueur selon son flip.
+        if (attackPoint != null)
+        {
+            float dir = (spriteRenderer != null && spriteRenderer.flipX) ? -1f : 1f;
+            Vector3 lp = attackPoint.localPosition;
+            lp.x = Mathf.Abs(attackPointOffsetX) * dir;
+            attackPoint.localPosition = lp;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPoint.position, attackBoxSize);
     }
 
     void MovePlayer(float _horizontalMvt){
