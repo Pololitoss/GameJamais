@@ -62,7 +62,9 @@ public class PivotHpOnClick : MonoBehaviour
     private bool hasRotateTarget;
     private float rotateRemainingDegrees;
 
-    private HealthBleu health;
+    [Header("Health source")]
+    [Tooltip("If set, uses this HealthBleu. If null, auto-finds one in the scene.")]
+    [SerializeField] private HealthBleu health;
 
     void Awake()
     {
@@ -75,13 +77,36 @@ public class PivotHpOnClick : MonoBehaviour
         // Use the visual center as pivot (works even if the Transform pivot isn't centered)
         pivotWorld = GetVisualCenterWorld(bar);
 
-        // Auto-find (can be overridden by putting HealthBleu on the same player / linking it manually)
-        health = FindFirstObjectByType<HealthBleu>();
-        if (health != null)
-            health.Damaged += OnDamaged;
+        // Binding moved to OnEnable so it also works reliably after scene loads.
+    }
+
+    private void OnEnable()
+    {
+        TryBind();
+    }
+
+    private void OnDisable()
+    {
+        Unbind();
     }
 
     private void OnDestroy()
+    {
+        Unbind();
+    }
+
+    private void TryBind()
+    {
+        if (health == null)
+            health = FindFirstObjectByType<HealthBleu>();
+
+        if (health != null)
+            health.Damaged += OnDamaged;
+        else
+            Debug.LogWarning("[PivotBleu] No HealthBleu found to subscribe to.", this);
+    }
+
+    private void Unbind()
     {
         if (health != null)
             health.Damaged -= OnDamaged;

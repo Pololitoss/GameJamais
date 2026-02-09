@@ -4,8 +4,8 @@ using UnityEngine;
 public class HealthOrange : MonoBehaviour
 {
     [Header("HP")]
-    [SerializeField] private int maxHp = 100;
-    [SerializeField] private int currentHp = 100;
+    [SerializeField] private int maxHp = 300;
+    [SerializeField] private int currentHp = 300;
 
     [Header("Invulnerability")]
     [Tooltip("Seconds of invulnerability after taking a hit.")]

@@ -20,6 +20,10 @@ public class DeathMenuButtons : MonoBehaviour
         if (resetTimeScaleOnAction)
             Time.timeScale = 1f;
 
+        // Start a fresh run: don't keep persisted HP from the previous attempt.
+        if (GameState.Instance != null)
+            GameState.Instance.ResetHpToDefaults();
+
         string scene = string.IsNullOrWhiteSpace(gameplaySceneName)
             ? SceneManager.GetActiveScene().name
             : gameplaySceneName;

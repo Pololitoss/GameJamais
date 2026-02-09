@@ -16,13 +16,20 @@ public class PerteHPBleu : MonoBehaviour
     void Awake()
     {
         if (bar == null) bar = transform;
-        if (health == null) health = FindFirstObjectByType<HealthBleu>();
+        if (health == null) health = FindBestHealthBleu();
 
         // Rotation-safe: do NOT use Renderer.bounds (world). Use localScale.x as width.
         initialLocalWidth = Mathf.Abs(bar.localScale.x);
 
         // Keep LEFT edge fixed in local space.
         initialLeftLocalX = bar.localPosition.x - (initialLocalWidth * 0.5f);
+    }
+
+    private void OnEnable()
+    {
+        // In some scenes, UI can enable before the correct player prefab finishes spawning.
+        if (health == null)
+            health = FindBestHealthBleu();
     }
 
     void Update()
@@ -58,5 +65,25 @@ public class PerteHPBleu : MonoBehaviour
         // Garde le sens du scale (si tu avais un scale négatif pour flip)
         s.x = sign * targetLocalWidth;
         t.localScale = s;
+    }
+
+    private HealthBleu FindBestHealthBleu()
+    {
+        HealthBleu best = null;
+        int bestCurrent = int.MaxValue;
+
+        foreach (var h in FindObjectsByType<HealthBleu>(FindObjectsSortMode.None))
+        {
+            if (h == null) continue;
+
+            // If duplicates exist, prefer the one that's actually taking damage.
+            if (h.CurrentHp < bestCurrent)
+            {
+                best = h;
+                bestCurrent = h.CurrentHp;
+            }
+        }
+
+        return best;
     }
 }

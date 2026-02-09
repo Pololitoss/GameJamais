@@ -297,12 +297,6 @@ public class Deplacement : MonoBehaviour
     }
 
     void MovePlayer(float _horizontalMvt){
-        // Ne pas bouger pendant l'attaque
-        if(animator.GetBool("IsAttacking"))
-        {
-            _horizontalMvt = 0;
-        }
-        
         Vector3 targetVelocity = new Vector2(_horizontalMvt, rb.linearVelocity.y);
         rb.linearVelocity = Vector3.SmoothDamp(rb.linearVelocity, targetVelocity, ref velocity, .05f); //la on applique la vitesse au rb
 

@@ -31,6 +31,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2120228814673911605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2714736258398032583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8890724778792088337}
+  m_Layer: 8
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8890724778792088337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714736258398032583}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.68, y: -1.43, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2120228814673911605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2959378089604199020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121665492002769009}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121665492002769009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2959378089604199020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.03, y: -0.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2120228814673911605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4502427738396067707
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +141,8 @@ GameObject:
   - component: {fileID: 840132168847109300}
   - component: {fileID: 4273661312884377186}
   - component: {fileID: 8274626052417357167}
+  - component: {fileID: 9010656278317815758}
+  - component: {fileID: 6940447913904136369}
   m_Layer: 8
   m_Name: StickBleu
   m_TagString: Player
@@ -101,6 +165,8 @@ Transform:
   m_Children:
   - {fileID: 968031071532245790}
   - {fileID: 2410781288377186156}
+  - {fileID: 8890724778792088337}
+  - {fileID: 121665492002769009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4406926433108067766
@@ -187,7 +253,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1566067298504109277
 BoxCollider2D:
@@ -257,6 +323,22 @@ MonoBehaviour:
   doubleJump: 0
   groundCheckLeft: {fileID: 968031071532245790}
   groundCheckRight: {fileID: 2410781288377186156}
+  attackPoint: {fileID: 121665492002769009}
+  attackBoxSize: {x: 1.2, y: 0.8}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  attackHit1Damage: 10
+  attackHit2Damage: 25
+  oneHitPerAttack: 1
+  autoFaceAttackPoint: 1
+  attackPointOffsetX: 0.6
+  health: {fileID: 0}
+  moveAction: {fileID: 889468124929075233, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  jumpAction: {fileID: -6638430151563542266, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackBiteAction: {fileID: -6112020948860062767, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackTeteAction: {fileID: -3933252765107884706, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  facingDeadzone: 0.05
 --- !u!114 &604175594802062549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6854468782900719726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -283,8 +365,8 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!58 &840132168847109300
@@ -381,3 +463,43 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9010656278317815758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6854468782900719726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e89262a5c574b330b654dcea9f1bce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBleu
+  maxHp: 300
+  currentHp: 300
+  invulnSeconds: 0.1
+  animator: {fileID: 0}
+  hitTriggerName: Hit
+  hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
+--- !u!114 &6940447913904136369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6854468782900719726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e89262a5c574b330b654dcea9f1bce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBleu
+  maxHp: 100
+  currentHp: 100
+  invulnSeconds: 0.1
+  animator: {fileID: 0}
+  hitTriggerName: Hit
+  hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead

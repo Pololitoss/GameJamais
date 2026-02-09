@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2567101087465416542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7741805973957286116}
+  m_Layer: 8
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7741805973957286116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567101087465416542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.94, y: -1.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800845212238933556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3951953047032768907
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,10 +105,14 @@ GameObject:
   - component: {fileID: 8197016916051722129}
   - component: {fileID: 8772429830465670206}
   - component: {fileID: 2987201513978959035}
+  - component: {fileID: 7137202048999253265}
   - component: {fileID: 7246876882660743236}
   - component: {fileID: 3990193676337447347}
   - component: {fileID: 242543938432098746}
   - component: {fileID: 8889019496600712675}
+  - component: {fileID: 220006674526089265}
+  - component: {fileID: 8491153524782952862}
+  - component: {fileID: 3388191755383576685}
   m_Layer: 8
   m_Name: StickOrange
   m_TagString: Player
@@ -100,6 +135,8 @@ Transform:
   m_Children:
   - {fileID: 4255466997750466847}
   - {fileID: 8436351895100823189}
+  - {fileID: 7741805973957286116}
+  - {fileID: 378240144875028306}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8197016916051722129
@@ -173,7 +210,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 9.81
@@ -186,7 +223,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2987201513978959035
 BoxCollider2D:
@@ -234,7 +271,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.6006722, y: 4.9669514}
   m_EdgeRadius: 0
---- !u!114 &7246876882660743236
+--- !u!114 &7137202048999253265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,6 +279,45 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6476879289045931009}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c6a93a1357f95e7aa4be467f6bf03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeplacementOrange
+  moveSpeed: 650
+  rb: {fileID: 8772429830465670206}
+  animator: {fileID: 8889019496600712675}
+  spriteRenderer: {fileID: 8197016916051722129}
+  isJumping: 0
+  jumpForce: 1500
+  isGrounded: 0
+  doubleJump: 0
+  groundCheckLeft: {fileID: 4255466997750466847}
+  groundCheckRight: {fileID: 8436351895100823189}
+  attackPoint: {fileID: 7741805973957286116}
+  attackBoxSize: {x: 1.2, y: 0.8}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  attackHit1Damage: 10
+  attackHit2Damage: 25
+  oneHitPerAttack: 1
+  autoFaceAttackPoint: 1
+  attackPointOffsetX: 0.6
+  attackLockTimeout: 0.9
+  facingDeadzone: 0.05
+  health: {fileID: 0}
+  moveOrangeAction: {fileID: 6319545204527332575, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  jumpOrangeAction: {fileID: 5474222732457742252, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackBiteOrangeAction: {fileID: -2875396767358042851, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackTeteOrangeAction: {fileID: 3286558324952652122, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+--- !u!114 &7246876882660743236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476879289045931009}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -259,9 +335,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!58 &3990193676337447347
@@ -358,3 +434,113 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &220006674526089265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476879289045931009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1318d83c935258a0b7fb76eaa31a903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthOrange
+  maxHp: 300
+  currentHp: 300
+  invulnSeconds: 0.1
+  animator: {fileID: 0}
+  hitTriggerName: Hit
+  hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
+--- !u!114 &8491153524782952862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476879289045931009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c6a93a1357f95e7aa4be467f6bf03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeplacementOrange
+  moveSpeed: 600
+  rb: {fileID: 8772429830465670206}
+  animator: {fileID: 8889019496600712675}
+  spriteRenderer: {fileID: 8197016916051722129}
+  isJumping: 0
+  jumpForce: 1500
+  isGrounded: 0
+  doubleJump: 0
+  groundCheckLeft: {fileID: 4255466997750466847}
+  groundCheckRight: {fileID: 8436351895100823189}
+  attackPoint: {fileID: 378240144875028306}
+  attackBoxSize: {x: 1.2, y: 0.8}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  attackHit1Damage: 10
+  attackHit2Damage: 25
+  oneHitPerAttack: 1
+  autoFaceAttackPoint: 1
+  attackPointOffsetX: 0.6
+  attackLockTimeout: 0.9
+  facingDeadzone: 0.05
+  health: {fileID: 0}
+  moveOrangeAction: {fileID: 6319545204527332575, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  jumpOrangeAction: {fileID: 5474222732457742252, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackBiteOrangeAction: {fileID: -2875396767358042851, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  attackTeteOrangeAction: {fileID: 3286558324952652122, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+--- !u!114 &3388191755383576685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476879289045931009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1318d83c935258a0b7fb76eaa31a903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthOrange
+  maxHp: 100
+  currentHp: 100
+  invulnSeconds: 0.1
+  animator: {fileID: 0}
+  hitTriggerName: Hit
+  hitVariantIntName: 
+  dieTriggerName: Die
+  isDeadBoolName: IsDead
+--- !u!1 &8828413834383081428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 378240144875028306}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &378240144875028306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8828413834383081428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.49, y: -0.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 800845212238933556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

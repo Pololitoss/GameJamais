@@ -11,13 +11,11 @@ public class ApplySavedHpOnStart : MonoBehaviour
         // If GameState hasn't been created yet, this will create it (default HPs = 100).
         var state = GameState.Instance;
 
-        var bleu = FindFirstObjectByType<HealthBleu>();
-        var orange = FindFirstObjectByType<HealthOrange>();
-
-        if (bleu != null)
+        // Apply to all instances in the scene (handles duplicates/disabled objects safely).
+        foreach (var bleu in FindObjectsByType<HealthBleu>(FindObjectsSortMode.None))
             state.ApplyTo(bleu);
 
-        if (orange != null)
+        foreach (var orange in FindObjectsByType<HealthOrange>(FindObjectsSortMode.None))
             state.ApplyTo(orange);
     }
 }

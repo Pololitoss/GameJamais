@@ -62,7 +62,9 @@ public class PivotOrange : MonoBehaviour
     private bool hasRotateTarget;
     private float rotateRemainingDegrees;
 
-    private HealthOrange health;
+    [Header("Health source")]
+    [Tooltip("If set, uses this HealthOrange. If null, auto-finds one in the scene.")]
+    [SerializeField] private HealthOrange health;
 
     void Awake()
     {
@@ -75,12 +77,36 @@ public class PivotOrange : MonoBehaviour
         // Use the visual center as pivot (works even if the Transform pivot isn't centered)
         pivotWorld = GetVisualCenterWorld(bar);
 
-        health = FindFirstObjectByType<HealthOrange>();
-        if (health != null)
-            health.Damaged += OnDamaged;
+        // Binding moved to OnEnable so it also works reliably after scene loads.
+    }
+
+    private void OnEnable()
+    {
+        TryBind();
+    }
+
+    private void OnDisable()
+    {
+        Unbind();
     }
 
     private void OnDestroy()
+    {
+        Unbind();
+    }
+
+    private void TryBind()
+    {
+        if (health == null)
+            health = FindFirstObjectByType<HealthOrange>();
+
+        if (health != null)
+            health.Damaged += OnDamaged;
+        else
+            Debug.LogWarning("[PivotOrange] No HealthOrange found to subscribe to.", this);
+    }
+
+    private void Unbind()
     {
         if (health != null)
             health.Damaged -= OnDamaged;

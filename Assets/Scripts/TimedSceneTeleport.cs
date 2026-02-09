@@ -40,11 +40,29 @@ public class TimedSceneTeleport : MonoBehaviour
 
         triggered = true;
 
-    // Persist HP before changing scenes.
-    var bleu = FindFirstObjectByType<HealthBleu>();
-    var orange = FindFirstObjectByType<HealthOrange>();
-    if (bleu != null) GameState.Instance.SaveBleu(bleu);
-    if (orange != null) GameState.Instance.SaveOrange(orange);
+        // Persist HP before changing scenes.
+        // Use all instances and keep the lowest CurrentHp found (avoids picking a fresh/full duplicate).
+        int bleuCur = int.MaxValue, bleuMax = 0;
+        foreach (var b in FindObjectsByType<HealthBleu>(FindObjectsSortMode.None))
+        {
+            if (b == null) continue;
+            bleuCur = Mathf.Min(bleuCur, b.CurrentHp);
+            bleuMax = Mathf.Max(bleuMax, b.MaxHp);
+        }
+
+        int orangeCur = int.MaxValue, orangeMax = 0;
+        foreach (var o in FindObjectsByType<HealthOrange>(FindObjectsSortMode.None))
+        {
+            if (o == null) continue;
+            orangeCur = Mathf.Min(orangeCur, o.CurrentHp);
+            orangeMax = Mathf.Max(orangeMax, o.MaxHp);
+        }
+
+        if (bleuCur != int.MaxValue)
+            GameState.Instance.SaveBleu(bleuCur, bleuMax);
+
+        if (orangeCur != int.MaxValue)
+            GameState.Instance.SaveOrange(orangeCur, orangeMax);
 
         // Save return info before changing scenes.
         TimedSceneReturnService.StartTimedReturn(SceneManager.GetActiveScene().name, durationSeconds);
